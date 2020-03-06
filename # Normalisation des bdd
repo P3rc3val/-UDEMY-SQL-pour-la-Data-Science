@@ -1,0 +1,42 @@
+
+
+SELECT nominations.movie
+FROM nominations
+INNER JOIN ceremonies
+ON nominations.ceremony_id == ceremonies.id
+WHERE ceremonies.year == 2010 AND nominations.won == 1
+;
+
+
+SELECT ceremonies.year, ceremonies.host, nominations.movie, nominations.nominee
+FROM nominations
+INNER JOIN ceemonies
+ON nominations.ceremony_id == ceremonies.id
+WHERE ceremonies.year == 2010
+;
+
+
+SELECT ceremonies.year, nominations.movie FROM nominations INNER JOIN ceremonies ON ceremonies.id == nominations.ceremony_id WHERE nominations.nominee == "Natalie Portman";
+
+CREATE TABLE movie_actors(
+id interger PRIMARY KEY,
+movie_id integer REFERENCES movies(id),
+actors_id integer REFERENCES actors(id)
+);
+
+
+SELECT * 
+FROM movies 
+INNER JOIN movie_actors ON  movies.id == movies_actors.movies_id
+;
+
+SELECT movies.movie 
+FROM actors 
+INNER JOIN movies_actors ON  movies.id == movies_actors.movie_id
+INNER JOIN actors ON movies_actors.actor_id == actors.id
+WHERE actors.actor == "Natalie Portman"
+;
+
+
+
+SELECT movies.movie, actors.actor  FROM movies INNER JOIN movies_actors ON  movies.id == movies_actors.movie_id INNER JOIN actors ON actors.id == movies_actors.actor_id WHERE actors.actor == "Natalie Portman";
